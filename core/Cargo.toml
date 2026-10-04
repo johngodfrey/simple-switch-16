@@ -1,0 +1,11 @@
+[package]
+name = "switch16-core"
+version.workspace = true
+edition.workspace = true
+description = "Pure Switch 16 game rules: no I/O, no randomness source, no Spin."
+
+[dependencies]
+serde = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

@@ -1,0 +1,35 @@
+spin_manifest_version = 2
+
+[application]
+name = "scale16"
+version = "0.1.0"
+authors = ["John Godfrey <john.paul.godfrey@red-badger.com>"]
+description = "Switch 16 dice game — scale-to-zero on Spin (Rust/WASM + React)"
+
+# ── API: Rust → wasm32-wasip1 ────────────────────────────────────────────────
+[[trigger.http]]
+route = "/api/..."
+component = "api"
+
+[component.api]
+source = "target/wasm32-wasip1/release/switch16_api.wasm"
+key_value_stores = ["default"]
+allowed_outbound_hosts = []
+
+[component.api.build]
+command = "cargo build --target wasm32-wasip1 --release -p switch16-api"
+watch = ["api/src/**/*.rs", "core/src/**/*.rs", "api/Cargo.toml", "core/Cargo.toml"]
+
+# ── Frontend: static files served by the Spin fileserver component ──────────
+[[trigger.http]]
+route = "/..."
+component = "web"
+
+[component.web]
+source = { url = "https://github.com/fermyon/spin-fileserver/releases/download/v0.3.0/spin_static_fs.wasm", digest = "sha256:ef88708817e107bf49985c7cefe4dd1f199bf26f6727819183d5c996baa3d148" }
+files = [{ source = "frontend/dist", destination = "/" }]
+environment = { FALLBACK_PATH = "index.html" }
+
+[component.web.build]
+command = "npm --prefix frontend ci && npm --prefix frontend run build"
+watch = ["frontend/src/**/*", "frontend/index.html", "frontend/package.json"]

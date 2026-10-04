@@ -1,0 +1,19 @@
+[package]
+name = "switch16-api"
+version.workspace = true
+edition.workspace = true
+description = "Thin Spin HTTP component: parse → load → make_move → save → JSON."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+switch16-core = { path = "../core" }
+anyhow = "1"
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Spin host bindings only exist on wasm; native builds run the service tests.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+spin-sdk = "5.2"
+getrandom = "0.3"

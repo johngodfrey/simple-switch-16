@@ -1,0 +1,4 @@
+target/
+.spin/
+frontend/node_modules/
+frontend/dist/
