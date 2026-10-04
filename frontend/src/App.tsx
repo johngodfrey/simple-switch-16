@@ -104,8 +104,12 @@ export default function App() {
     return (
       <main className="shell start">
         <h1 className="logo">
-          Switch<span>16</span>
+          SimpleSwitch<span>16</span>
         </h1>
+        <p>
+          Inspired by Switch 16, a classic 2-to-4-player family board game
+          published by Tomy and designed by Anthony Vadasz
+        </p>
         <p className="lede">
           Roll the dice. Pick dice that add up to your card. Clear cards 1
           through 16 in as few rolls as you can.
@@ -150,7 +154,7 @@ export default function App() {
     <main className="shell">
       <header className="topbar">
         <h1 className="logo small">
-          Switch<span>16</span>
+          SimpleSwitch<span>16</span>
         </h1>
         <div className="stats">
           <span>{player.name}</span>
